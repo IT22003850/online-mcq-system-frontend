@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.post(`${API_BASE_URL}/api/users/login`, { name, email });
       setUser(response.data);
       localStorage.setItem('token', response.data.token);
-      navigate('/exams');
+      navigate('/');
     } catch (error) {
       throw error.response.data.message || 'Login failed';
     }
@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.post(`${API_BASE_URL}/api/users`, { name, email });
       setUser(response.data);
       localStorage.setItem('token', response.data.token);
-      navigate('/exams');
+      navigate('/');
     } catch (error) {
       throw error.response.data.message || 'Registration failed';
     }
