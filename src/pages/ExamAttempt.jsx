@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import Question from '../components/Question';
+import { API_BASE_URL } from '../config';
 
 function ExamAttempt() {
   const { examId } = useParams();
@@ -14,7 +15,7 @@ function ExamAttempt() {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await axios.get(`/api/exams/${examId}/questions`, {
+        const response = await axios.get(`${API_BASE_URL}/api/exams/${examId}/questions`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         setQuestions(response.data);
@@ -51,7 +52,7 @@ function ExamAttempt() {
 
     try {
       const response = await axios.post(
-        `/api/exams/${examId}/submit`,
+        `${API_BASE_URL}/api/exams/${examId}/submit`,
         { answers: answerArray },
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       );

@@ -1,6 +1,9 @@
 import { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../config';
+import App from '../App';
+
 
 export const AuthContext = createContext();
 
@@ -13,7 +16,7 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem('token');
     if (token) {
       axios
-        .get('/api/users/me', {
+        .get(`${API_BASE_URL}/api/users/me`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
@@ -32,7 +35,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (name, email) => {
     try {
-      const response = await axios.post('/api/users/login', { name, email });
+      const response = await axios.post(`${API_BASE_URL}/api/users/login`, { name, email });
       setUser(response.data);
       localStorage.setItem('token', response.data.token);
       navigate('/exams');
@@ -43,7 +46,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (name, email) => {
     try {
-      const response = await axios.post('/api/users', { name, email });
+      const response = await axios.post(`${API_BASE_URL}/api/users`, { name, email });
       setUser(response.data);
       localStorage.setItem('token', response.data.token);
       navigate('/exams');

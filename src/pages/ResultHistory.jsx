@@ -3,7 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-
+import { API_BASE_URL } from '../config';
 
 function ResultHistory() {
   const { user } = useContext(AuthContext);
@@ -18,7 +18,7 @@ function ResultHistory() {
 
     const fetchResults = async () => {
       try {
-        const response = await axios.get(`/api/results/${user.id}`, {
+        const response = await axios.get(`${API_BASE_URL}/api/results/${user.id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         setResults(response.data);

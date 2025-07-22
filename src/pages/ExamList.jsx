@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import ExamCard from '../components/ExamCard';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../config';
 
 function ExamList() {
   const [exams, setExams] = useState([]);
@@ -11,7 +12,7 @@ function ExamList() {
   useEffect(() => {
     const fetchExams = async () => {
       try {
-        const response = await axios.get('/api/exams', {
+        const response = await axios.get(`${API_BASE_URL}/api/exams`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         setExams(response.data);
