@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
+
 function ResultHistory() {
   const { user } = useContext(AuthContext);
   const [results, setResults] = useState([]);
