@@ -1,162 +1,126 @@
 # Online MCQ System - Frontend
 
 ## Overview
-
-The frontend for the Online MCQ System is a React application built with Vite, Tailwind CSS, and React Router. It provides a user interface for registering, logging in, taking multiple-choice exams, submitting answers, and viewing result history. It communicates with the backend API at `http://localhost:5000`.
+The frontend of the Online MCQ System is a React application built with Vite, Tailwind CSS, and React Router. It provides a user-friendly interface for users to register, log in, take exams, submit answers, and view their results. The application communicates with the backend via REST APIs and uses JWT for authentication.
 
 ## Features
-
-- **User Authentication**: Register and login with JWT-based authentication.
-- **Exam Interface**: List exams, take exams with 5 questions each, and submit answers.
-- **Result History**: View past exam results with scores and answer details.
-- **Responsive Design**: Styled with Tailwind CSS for a modern, responsive UI.
-- **Toast Notifications**: Feedback for user actions using `react-toastify`.
-
-## Technologies
-
-- React
-- Vite
-- Tailwind CSS
-- React Router
-- Axios
-- React Toastify
+- User registration and login
+- Display available exams
+- Attempt exams with multiple-choice questions
+- Submit answers and view immediate results
+- View result history
+- Responsive design with Tailwind CSS
+- Toast notifications for user feedback
 
 ## Prerequisites
-
 - Node.js (v16 or higher)
-- npm
-- Backend server running at `http://localhost:5000`
+- npm (Node Package Manager)
+- Backend server running (default: `http://localhost:5000`)
 
-## Setup Instructions
-
-1. **Clone the Repository** (if applicable):
+## Installation
+1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/IT22003850/online-mcq-system-frontend.git
    cd online-mcq-system-frontend
    ```
 
-2. **Install Dependencies**:
+2. Install dependencies:
    ```bash
    npm install
    ```
-   Required dependencies (in `package.json`):
-   ```json
-   {
-     "dependencies": {
-       "react": "^18.2.0",
-       "react-dom": "^18.2.0",
-       "react-router-dom": "^6.16.0",
-       "axios": "^1.4.0",
-       "react-toastify": "^9.1.3"
-     },
-     "devDependencies": {
-       "@vitejs/plugin-react": "^4.0.0",
-       "vite": "^4.4.0",
-       "tailwindcss": "^3.3.3",
-       "postcss": "^8.4.27",
-       "autoprefixer": "^10.4.14"
-     }
-   }
+
+3. Update the API base URL in `src/config.js` if necessary:
+   ```javascript
+   export const API_BASE_URL = 'https://online-mcq-system-backend-production.up.railway.app';
    ```
 
-3. **Configure Vite Proxy**:
-   - Ensure `vite.config.js` proxies API requests to the backend:
-     ```javascript
-     import { defineConfig } from 'vite';
-     import react from '@vitejs/plugin-react';
-
-     export default defineConfig({
-       plugins: [react()],
-       server: {
-         proxy: {
-           '/api': {
-             target: 'http://localhost:5000',
-             changeOrigin: true,
-             secure: false,
-           },
-         },
-       },
-     });
-     ```
-
-4. **Configure Tailwind CSS**:
-   - Verify `tailwind.config.js`:
-     ```javascript
-     /** @type {import('tailwindcss').Config} */
-     export default {
-       content: [
-         './index.html',
-         './src/**/*.{js,ts,jsx,tsx}',
-       ],
-       theme: {
-         extend: {},
-       },
-       plugins: [],
-     };
-     ```
-   - Verify `postcss.config.js`:
-     ```javascript
-     export default {
-       plugins: {
-         tailwindcss: {},
-         autoprefixer: {},
-       },
-     };
-     ```
-   - Verify `index.css`:
-     ```css
-     @tailwind base;
-     @tailwind components;
-     @tailwind utilities;
-     ```
-
-5. **Run the Development Server**:
+4. Start the development server:
    ```bash
    npm run dev
    ```
-   - The frontend runs on `http://localhost:5173`.
 
-## Directory Structure
+5. Build for production:
+   ```bash
+   npm run build
+   ```
 
+6. Preview the production build:
+   ```bash
+   npm run preview
+   ```
+
+## Project Structure
 ```
 online-mcq-system-frontend/
 ├── src/
 │   ├── components/
-│   │   ├── ExamList.jsx
-│   │   ├── ExamAttempt.jsx
-│   │   ├── ResultHistory.jsx
-│   │   ├── Register.jsx
-│   │   ├── Login.jsx
-│   │   └── Home.jsx
+│   │   ├── ExamCard.jsx        # Component for displaying exam cards
+│   │   ├── Navbar.jsx          # Navigation bar component
+│   │   ├── Question.jsx        # Component for displaying questions
 │   ├── context/
-│   │   └── AuthContext.jsx
-│   ├── App.jsx
-│   ├── main.jsx
-│   └── index.css
-├── public/
-├── vite.config.js
-├── tailwind.config.js
-├── postcss.config.js
-└── package.json
+│   │   ├── AuthContext.jsx     # Authentication context for user state
+│   ├── pages/
+│   │   ├── ExamAttempt.jsx     # Page for attempting exams
+│   │   ├── ExamList.jsx        # Page for listing exams
+│   │   ├── Home.jsx            # Home page
+│   │   ├── Login.jsx           # Login page
+│   │   ├── Register.jsx        # Registration page
+│   │   ├── Result.jsx          # Result display page
+│   │   ├── ResultHistory.jsx   # Result history page
+│   ├── App.jsx                 # Main app component with routes
+│   ├── config.js               # API base URL configuration
+│   ├── index.css              # Tailwind CSS styles
+│   ├── main.jsx               # Entry point for React
+├── index.html                  # HTML entry point
+├── netlify.toml                # Netlify configuration
+├── package.json                # Project dependencies and scripts
+├── postcss.config.js           # PostCSS configuration
+├── tailwind.config.js          # Tailwind CSS configuration
+├── vite.config.js              # Vite configuration
 ```
 
-## Usage
+## Dependencies
+- `react`: React library
+- `react-dom`: React DOM rendering
+- `react-router-dom`: Client-side routing
+- `axios`: HTTP client for API requests
+- `react-toastify`: Toast notifications
+- `@vitejs/plugin-react`: Vite plugin for React
+- `tailwindcss`: CSS framework
+- `autoprefixer`: CSS vendor prefixing
+- `postcss`: CSS post-processing
+- `vite`: Build tool
 
-1. **Register/Login**:
-   - Navigate to `http://localhost:5173/register` or `/login`.
-   - Use `name: Test User`, `email: test@example.com` (seeded user).
+## Scripts
+- `npm run dev`: Start development server
+- `npm run build`: Build for production
+- `npm run preview`: Preview production build
 
-2. **Take an Exam**:
-   - Go to `/exams`, select an exam (e.g., Math Mock Test).
-   - Answer 5 questions and submit.
+## Deployment
+The frontend is deployed on Netlify at `https://online-mcq-system.netlify.app`. The `netlify.toml` file configures redirects to support client-side routing.
 
-3. **View Results**:
-   - Visit `/history` to see past exam results with scores and answer details.
+## Screenshots
 
-## Troubleshooting
+![Login Page](./screenshots/login.png)
+*Login Page*
 
-- **404 Errors**: Ensure backend is running (`http://localhost:5000`) and `vite.config.js` proxy is set.
-- **401 Unauthorized**: Verify JWT token in `localStorage` and login with seeded user credentials.
-- **Tailwind CSS Issues**: Check browser console (F12) for CSS errors and verify Tailwind configuration.
-- **No Results in History**: Submit an exam to populate the `Result` collection.
-- Contact: `serendilabs@gmail.com` for support.
+![Home Interface](./screenshots/home.png)
+*Home Interface*
+
+![Exam Interface](./screenshots/exams.png)
+*Exams Interface*
+
+![Questions Interface](./screenshots/questions.png)
+*Questions Interface*
+
+![Results Interface](./screenshots/results.png)
+*Results Interface*
+
+![Results History Interface](./screenshots/results_history.png)
+*Results History Interface*
+
+## Notes
+- The application uses a proxy in development to forward `/api` requests to the backend (default: `http://localhost:5000`).
+- Authentication is managed via JWT stored in `localStorage`.
+- Ensure the backend server is running and accessible at the URL specified in `src/config.js`.
+- Tailwind CSS is used for styling, with configurations in `tailwind.config.js`.
