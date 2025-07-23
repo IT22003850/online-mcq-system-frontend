@@ -12,29 +12,41 @@ function Navbar() {
         <Link to="/" className="text-white text-xl font-bold">
           MCQ System
         </Link>
-        <div className="space-x-4">
+        <div className="flex space-x-4 items-center">
           {user ? (
             <>
-              <span className="text-white">Welcome, {user.name}</span>
-              <Link to="/exams" className="text-white hover:text-gray-200">
+              <span className="text-white text-sm md:text-base">Welcome, {user.name}</span>
+              <Link
+                to="/exams"
+                className="text-white bg-blue-700 hover:bg-blue-800 px-3 py-2 rounded-md text-sm md:text-base transition duration-200"
+              >
                 Exams
               </Link>
-              <Link to="/history" className="text-white hover:text-gray-200">
+              <Link
+                to="/history"
+                className="text-white bg-blue-700 hover:bg-blue-800 px-3 py-2 rounded-md text-sm md:text-base transition duration-200"
+              >
                 History
               </Link>
               <button
                 onClick={logout}
-                className="text-white hover:text-gray-200"
+                className="text-white bg-red-600 hover:bg-red-700 px-3 py-2 rounded-md text-sm md:text-base transition duration-200"
               >
                 Logout
               </button>
             </>
           ) : (
             <>
-              <Link to="/register" className="text-white hover:text-gray-200">
+              <Link
+                to="/register"
+                className="text-white bg-blue-700 hover:bg-blue-800 px-3 py-2 rounded-md text-sm md:text-base transition duration-200"
+              >
                 Register
               </Link>
-              <Link to="/login" className="text-white hover:text-gray-200">
+              <Link
+                to="/login"
+                className="text-white bg-blue-700 hover:bg-blue-800 px-3 py-2 rounded-md text-sm md:text-base transition duration-200"
+              >
                 Login
               </Link>
             </>
