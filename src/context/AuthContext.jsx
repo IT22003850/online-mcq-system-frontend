@@ -7,7 +7,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // Ensure loading is true initially
+  const [loading, setLoading] = useState(true); // Initial loading state
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,22 +33,28 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (name, email) => {
     try {
+      setLoading(true); // Set loading to true during login
       const response = await axios.post(`${API_BASE_URL}/api/users/login`, { name, email });
-      setUser(response.data);
+      setUser(response.data); // Set user state
       localStorage.setItem('token', response.data.token);
-      navigate('/');
+      setLoading(false); // Set loading to false after user is set
+      navigate('/'); // Navigate after state updates
     } catch (error) {
+      setLoading(false); // Ensure loading is false on error
       throw error.response.data.message || 'Login failed';
     }
   };
 
   const register = async (name, email) => {
     try {
+      setLoading(true); // Set loading to true during registration
       const response = await axios.post(`${API_BASE_URL}/api/users`, { name, email });
-      setUser(response.data);
+      setUser(response.data); // Set user state
       localStorage.setItem('token', response.data.token);
-      navigate('/');
+      setLoading(false); // Set loading to false after user is set
+      navigate('/'); // Navigate after state updates
     } catch (error) {
+      setLoading(false); // Ensure loading is false on error
       throw error.response.data.message || 'Registration failed';
     }
   };
