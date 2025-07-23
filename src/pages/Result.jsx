@@ -23,8 +23,8 @@ function Result() {
             <h3 className="font-semibold">
               {index + 1}. {answer.question_text}
             </h3>
-            <p>Your Answer: {answer.selected_option}</p>
-            <p>Correct Answer: {answer.correct_option}</p>
+            <p>Your Answer: {answer.selected_option + 1}</p>
+            <p>Correct Answer: {answer.correct_option + 1}</p>
             <p>Status: {answer.is_correct ? 'Correct' : 'Incorrect'}</p>
           </div>
         ))}

@@ -64,8 +64,8 @@ function ResultHistory() {
                     <p>
                       {index + 1}. {answer.question_text}
                     </p>
-                    <p>Your Answer: {answer.selected_option}</p>
-                    <p>Correct Answer: {answer.correct_option}</p>
+                    <p>Your Answer: {answer.selected_option + 1}</p>
+                    <p>Correct Answer: {answer.correct_option + 1}</p>
                   </div>
                 ))}
               </div>
