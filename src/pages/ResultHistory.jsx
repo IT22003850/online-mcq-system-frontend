@@ -6,11 +6,14 @@ import { AuthContext } from '../context/AuthContext';
 import { API_BASE_URL } from '../config';
 
 function ResultHistory() {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext); // Add loading from AuthContext
   const [results, setResults] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Wait until loading is complete and user is checked
+    if (loading) return; // Do nothing while loading
+
     if (!user) {
       navigate('/login');
       return;
@@ -31,7 +34,12 @@ function ResultHistory() {
       }
     };
     fetchResults();
-  }, [user, navigate]);
+  }, [user, loading, navigate]); // Add loading to dependencies
+
+  // Show loading state while AuthContext is fetching user data
+  if (loading) {
+    return <div className="text-center">Loading...</div>;
+  }
 
   return (
     <div>
